@@ -2,12 +2,11 @@ var express = require('express');
 var app = express();
 
 var passport = require('passport');
-var flash = require('connect-flash');
 
 
 var IntercomStrategy = require('passport-intercom').Strategy;
 
-app.use(flash());
+
 
 passport.use(new IntercomStrategy({
     clientID: 'e3d7ab13-742a-4a05-baf1-f246a38bd182',
