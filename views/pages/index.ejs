@@ -417,6 +417,36 @@
                 </div>
             </div>
         </div>
+        <div class ="row">
+                <div class="col-lg-6">
+        <div class="hpanel">
+            <div class="panel-heading">
+                <div class="panel-tools">
+                    <a class="showhide"><i class="fa fa-chevron-up"></i></a>
+                    <a class="closebox"><i class="fa fa-times"></i></a>
+                </div>
+                Registered Users
+            </div>
+            <div class="panel-body">
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-default active" data-period="day">
+                        <input type="checkbox"> Day
+                    </label>
+                    <label class="btn btn-default" data-period="week">
+                        <input type="checkbox"> Week
+                    </label>
+                    <label class="btn btn-default" data-period="month">
+                        <input type="checkbox"> Month
+                    </label>
+                </div>
+               
+                <div>
+                    <canvas id="registeredUsers" height="140"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
         <div class="row">
             <div class="col-lg-3">
                 <div class="hpanel">
@@ -857,6 +887,7 @@
 <script src="vendor/iCheck/icheck.min.js"></script>
 <script src="vendor/peity/jquery.peity.min.js"></script>
 <script src="vendor/sparkline/index.js"></script>
+<script src="vendor/chartjs/Chart.min.js"></script>
 
 <!-- App scripts -->
 <script src="javascripts/homer.js"></script>
@@ -865,7 +896,92 @@
 <script>
 
     $(function () {
+        $('.btn-group input[type="checkbox"]').on('change', function() {
+            var previousSelected=$('.active').not(this);
+           previousSelected.removeClass("active");
+           var period= $(this).parent().attr("data-period")
+           createRegisterUsersChart(period);
+        });
 
+      
+        var createRegisterUsersChart= function(period){
+
+             var lineData;
+           
+            if (period==="day") {
+               lineData = {  labels: ["09.01", "10.01", "11.01", "12.01", "13.01", "14.01", "15.01"],
+                datasets: [
+                {
+                    label: "Example dataset",
+                    fillColor: "rgba(227,245,255,0.5)",
+                    strokeColor: "rgba(37,149,255,1)",
+                    pointColor: "rgba(37,149,255,1)",
+                    pointStrokeColor: "#32749a",
+                    pointHighlightFill: "#32749a",
+                    pointHighlightStroke: "rgba(37,149,255,1)",
+                    data: [12, 18, 23, 20, 29, 26, 4]
+                }
+                ]
+                };
+            }
+
+            if (period==="month") {
+                  lineData = {
+                    labels: ["January", "February", "March", "April", "May", "June", "July"],
+                    datasets: [
+                    {
+                        label: "Example dataset", 
+                        fillColor: "rgba(227,245,255,0.5)",
+                    strokeColor: "rgba(37,149,255,1)",
+                    pointColor: "rgba(37,149,255,1)",
+                    pointStrokeColor: "#32749a",
+                    pointHighlightFill: "#32749a",
+                    pointHighlightStroke: "rgba(37,149,255,1)",
+                        data: [22, 44, 67, 43, 76, 45, 12]
+                    }
+                    ]
+                };
+            }
+
+            if (period==="week") {
+                  lineData = {
+                    labels: ["02.01-08.01", "09.01-01.15", "16.01-21.01", "23.01-29.01", "30.01-05.02", "06.02-12.02", "13.02-19.02"],
+                    datasets: [
+                    {
+                        label: "Example dataset",
+                       fillColor: "rgba(227,245,255,0.5)",
+                    strokeColor: "rgba(37,149,255,1)",
+                    pointColor: "rgba(37,149,255,1)",
+                    pointStrokeColor: "#32749a",
+                    pointHighlightFill: "#32749a",
+                    pointHighlightStroke: "rgba(37,149,255,1)",
+                        data: [45, 23, 35, 12, 31, 26, 39]
+                    }
+                    ]
+                };
+            }
+
+            var lineOptions = {
+                scaleShowGridLines : true,
+                scaleGridLineColor : "rgba(0,0,0,.05)",
+                scaleGridLineWidth : 1,
+                bezierCurve : true,
+                bezierCurveTension : 0.4,
+                pointDot : true,
+                pointDotRadius : 4,
+                pointDotStrokeWidth : 1,
+                pointHitDetectionRadius : 20,
+                datasetStroke : true,
+                datasetStrokeWidth : 1,
+                datasetFill : true,
+                responsive: true
+            };
+
+
+            var ctx = document.getElementById("registeredUsers").getContext("2d");
+            var myNewChart = new Chart(ctx).Line(lineData, lineOptions);
+        }
+          createRegisterUsersChart("day");
         /**
          * Flot charts data and options
          */

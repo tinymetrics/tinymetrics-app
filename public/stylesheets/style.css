@@ -1149,9 +1149,9 @@ fieldset[disabled] .btn-info.active {
 .btn-default:active,
 .btn-default.active,
 .open .dropdown-toggle.btn-default {
-  background-color: #fff;
-  border-color: #d9dbdd;
-  color: #606265;
+background-color: #f1f3f6;
+    border-color: #e4e5e7;
+    color: #606265;
 }
 .btn-default:active,
 .btn-default.active,
@@ -3631,3 +3631,10 @@ ul.h-list li:hover a {
     margin-left: 10px;
   }
 }
+
+.btn-default:active !important{
+background-color: #f1f3f6;
+    border-color: #e4e5e7;
+    color: #606265;
+  }
+
