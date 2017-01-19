@@ -96,7 +96,7 @@ app.get('/auth/redirect',
     res.redirect('/');
   });
 
-});
+//});
 
   // passport.authenticate('intercom', { failureRedirect: '/register' }),
   // function(req, res) {
