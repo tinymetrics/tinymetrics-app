@@ -53,11 +53,10 @@ app.get('/auth/intercom/callback',
     res.redirect('/');
   });
 
-app.get('/auth/redirect', 
-  // function(request, response) {
+app.get('/auth/redirect',  function(request, response) {
 
 
-  //   console.log("CODE:"+request.query.code);
+    console.log("CODE:"+request.query.code);
  
   //  var myJSONObject = { 
   //   code:request.query.code,
@@ -88,13 +87,21 @@ app.get('/auth/redirect',
 
   // });
 
-    passport.authenticate('intercom', { failureRedirect: '/register' }),
-  function(req, res) {
-    console.log("PASS");
-    console.log('res' + res);
-    // Successful authentication, redirect home.
-    res.redirect('/');
-  });
+  request.post(
+    'https://api.intercom.io/auth/eagle/token',
+    { json: { code:request.query.code,
+     client_id:config.intercom.clientID,
+     client_secret:config.intercom.clientSecret
+     } },
+    function (error, resp, body) {
+        if (!error && resp.statusCode == 200) {
+            console.log(body);
+                res.redirect('/');
+        }
+    }
+);
+
+   });
 
 //});
 
