@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 var passport = require('passport');
 var config = require('./config.js');
-var request = require('request');
+var requestHttp = require('request');
 
 
 var IntercomStrategy = require('passport-intercom').Strategy;
@@ -52,15 +52,17 @@ app.get('/auth/intercom/callback',
   });
 
 app.get('/auth/redirect', function(request, response) {
-  console.log(request.params.code);
+  console.log("response"+response);
+  
+    console.log(request.query.code);
  
    var myJSONObject = { 
-    code:request.params.code,
+    code:request.query.code,
     client_id:config.intercom.clientID,
     client_secret:config.intercom.clientSecret
    };
 
-  request({
+  requestHttp({
       url: "https://api.intercom.io/auth/eagle/token",
       method: "POST",
       json: true,   // <--Very important!!!
