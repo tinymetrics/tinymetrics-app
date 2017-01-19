@@ -2,7 +2,8 @@ var express = require('express');
 var app = express();
 var passport = require('passport');
 var config = require('./config.js');
-var requestHttp = require('request');
+var http = require('http');
+http.post = require('http-post');
 var Intercom = require('intercom-client');
 
 
@@ -64,26 +65,43 @@ app.get('/auth/redirect', function(request, response) {
     client_secret:config.intercom.clientSecret
    };
 
-  requestHttp({
-      url: "https://api.intercom.io/auth/eagle/token",
-      method: "POST",
-      json: true,   // <--Very important!!!
-      body: myJSONObject
-  }, function (error, res, data){
-    console.log("DONEEEE");
-     
-    console.log(res);
-    console.log(data)
-      var client = new Intercom.Client({ token: res.token });
-      console.log("clienyt"+client);
-       client.users.list(function (d) {
-          console.log("clienUsers");
-          console.log(d);
-        });
+   http.post('https://api.intercom.io/auth/eagle/token', 
+    { 
+      code:request.query.code,
+      client_id:config.intercom.clientID,
+      client_secret:config.intercom.clientSecret
+     }, 
+      function(res){
+        console.log("DONEE");
+      res.setEncoding('utf8');
+      res.on('data', function(chunk) {
+          console.log(chunk);
+            response.redirect('/');
 
-        response.redirect('/');
-
+      });
   });
+
+
+  // requestHttp({
+  //     url: "https://api.intercom.io/auth/eagle/token",
+  //     method: "POST",
+  //     json: true,   // <--Very important!!!
+  //     body: myJSONObject
+  // }, function (error, res, data){
+  //   console.log("DONEEEE");
+     
+  //   console.log(res);
+  //   console.log(data)
+  //     var client = new Intercom.Client({ token: res.token });
+  //     console.log("clienyt"+client);
+  //      client.users.list(function (d) {
+  //         console.log("clienUsers");
+  //         console.log(d);
+  //       });
+
+  //       response.redirect('/');
+
+  // });
 
 });
 
