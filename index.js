@@ -54,9 +54,9 @@ app.get('/auth/intercom/callback',
   });
 
 app.get('/auth/redirect', function(request, response) {
-  console.log("response"+response);
 
-    console.log(request.query.code);
+
+    console.log("CODE:"+request.query.code);
  
    var myJSONObject = { 
     code:request.query.code,
@@ -70,10 +70,8 @@ app.get('/auth/redirect', function(request, response) {
       json: true,   // <--Very important!!!
       body: myJSONObject
   }, function (error, res, body){
-      console.log("res");
-      console.log(res);
-      console.log("body");
-      console.log(body);
+      console.log("DONEEEE");
+     
       var jsonData = JSON.parse(body);
       var client = new Intercom.Client({ token: jsonData.token });
       console.log("clienyt"+client);
@@ -87,9 +85,6 @@ app.get('/auth/redirect', function(request, response) {
   });
 
 });
-
-
-
 
   // passport.authenticate('intercom', { failureRedirect: '/register' }),
   // function(req, res) {
