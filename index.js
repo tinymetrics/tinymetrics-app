@@ -69,10 +69,11 @@ app.get('/auth/redirect', function(request, response) {
       method: "POST",
       json: true,   // <--Very important!!!
       body: myJSONObject
-  }, function (error, res, body){
-      console.log("DONEEEE");
+  }, function (error, res, data){
+    console.log("DONEEEE");
      
-      var jsonData = JSON.parse(body);
+    var jsonData= JSON.parse(res);
+    console.log(jsonData);
       var client = new Intercom.Client({ token: jsonData.token });
       console.log("clienyt"+client);
        client.users.list(function (d) {
