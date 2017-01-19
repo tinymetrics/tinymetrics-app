@@ -86,13 +86,14 @@ app.get('/auth/redirect', function(request, response) {
         response.redirect('/');
 
   });
-    passport.authenticate('intercom', { failureRedirect: '/register' }),
-  function(req, res) {
-    console.log("PASS");
-    console.log('res' + res);
-    // Successful authentication, redirect home.
-    res.redirect('/');
-  });
+  
+  //   passport.authenticate('intercom', { failureRedirect: '/register' }),
+  // function(req, res) {
+  //   console.log("PASS");
+  //   console.log('res' + res);
+  //   // Successful authentication, redirect home.
+  //   res.redirect('/');
+  // });
 
 });
 
