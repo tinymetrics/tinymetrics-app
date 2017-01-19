@@ -3,6 +3,7 @@ var app = express();
 var passport = require('passport');
 var config = require('./config.js');
 var requestHttp = require('request');
+var Intercom = require('intercom-client');
 
 
 var IntercomStrategy = require('passport-intercom').Strategy;
@@ -33,6 +34,7 @@ app.get('/', function(request, response) {
 });
 
 app.get('/register', function(request, response) {
+
   response.render('pages/register');
 });
 
@@ -53,7 +55,7 @@ app.get('/auth/intercom/callback',
 
 app.get('/auth/redirect', function(request, response) {
   console.log("response"+response);
-  
+
     console.log(request.query.code);
  
    var myJSONObject = { 
@@ -67,12 +69,25 @@ app.get('/auth/redirect', function(request, response) {
       method: "POST",
       json: true,   // <--Very important!!!
       body: myJSONObject
-  }, function (error, response, body){
-      console.log(response);
-       console.log(body);
+  }, function (error, res, body){
+      console.log("res");
+      console.log(res);
+      console.log("body");
+      console.log(body);
+      var jsonData = JSON.parse(body);
+      var client = new Intercom.Client({ token: jsonData.token });
+      console.log("clienyt"+client);
+       client.users.list(function (d) {
+          console.log("clienUsers");
+          console.log(d);
+        });
+
+        response.redirect('/');
+
   });
 
 });
+
 
 
 
