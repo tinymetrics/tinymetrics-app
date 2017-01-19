@@ -75,7 +75,7 @@ app.get('/auth/redirect', function(request, response) {
   }, function (error, res){
     console.log("DONEEEE");
      
-    console.log(res);
+    console.log(JSON.parse(res));
       var client = new Intercom.Client({ token: res.token });
       console.log("clienyt"+client);
        client.users.list(function (d) {
@@ -85,6 +85,13 @@ app.get('/auth/redirect', function(request, response) {
 
         response.redirect('/');
 
+  });
+    passport.authenticate('intercom', { failureRedirect: '/register' }),
+  function(req, res) {
+    console.log("PASS");
+    console.log('res' + res);
+    // Successful authentication, redirect home.
+    res.redirect('/');
   });
 
 });
