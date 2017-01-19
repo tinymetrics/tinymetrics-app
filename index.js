@@ -7,7 +7,7 @@ var config = require('./config.js');
 var IntercomStrategy = require('passport-intercom').Strategy;
 
 passport.use(new IntercomStrategy({
-  clientID: config.intercom.clientID,
+    clientID: config.intercom.clientID,
     clientSecret: config.intercom.clientSecret,
     callbackURL: config.intercom.callbackURL
     
