@@ -53,47 +53,48 @@ app.get('/auth/intercom/callback',
     res.redirect('/');
   });
 
-app.get('/auth/redirect', function(request, response) {
+app.get('/auth/redirect', 
+  // function(request, response) {
 
 
-    console.log("CODE:"+request.query.code);
+  //   console.log("CODE:"+request.query.code);
  
-   var myJSONObject = { 
-    code:request.query.code,
-    client_id:config.intercom.clientID,
-    client_secret:config.intercom.clientSecret
-   };
+  //  var myJSONObject = { 
+  //   code:request.query.code,
+  //   client_id:config.intercom.clientID,
+  //   client_secret:config.intercom.clientSecret
+  //  };
 
 
 
 
-  requestHttp({
-      url: "https://api.intercom.io/auth/eagle/token",
-      method: "POST",
-      json: true,   // <--Very important!!!
-      body: myJSONObject
-  }, function (error, res){
-    console.log("DONEEEE");
+  // requestHttp({
+  //     url: "https://api.intercom.io/auth/eagle/token",
+  //     method: "POST",
+  //     json: true,   // <--Very important!!!
+  //     body: myJSONObject
+  // }, function (error, res){
+  //   console.log("DONEEEE");
      
-    console.log(JSON.parse(res));
-      var client = new Intercom.Client({ token: res.token });
-      console.log("clienyt"+client);
-       client.users.list(function (d) {
-          console.log("clienUsers");
-          console.log(d);
-        });
+  //   console.log(JSON.parse(res));
+  //     var client = new Intercom.Client({ token: res.token });
+  //     console.log("clienyt"+client);
+  //      client.users.list(function (d) {
+  //         console.log("clienUsers");
+  //         console.log(d);
+  //       });
 
-        response.redirect('/');
+  //       response.redirect('/');
 
-  });
-  
-  //   passport.authenticate('intercom', { failureRedirect: '/register' }),
-  // function(req, res) {
-  //   console.log("PASS");
-  //   console.log('res' + res);
-  //   // Successful authentication, redirect home.
-  //   res.redirect('/');
   // });
+
+    passport.authenticate('intercom', { failureRedirect: '/register' }),
+  function(req, res) {
+    console.log("PASS");
+    console.log('res' + res);
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
 
 });
 
