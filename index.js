@@ -96,7 +96,16 @@ app.get('/auth/redirect',  function(request, response) {
     function (error, resp, body) {
         if (!error && resp.statusCode == 200) {
             console.log(body);
-                res.redirect('/');
+            var data=JSON.parse(body);
+            var client = new Intercom.Client({ token: data.token });
+            console.log("clienyt"+client);
+             client.users.list(function (d) {
+                console.log("clienUsers");
+                console.log(d);
+              });
+
+
+                response.redirect('/');
         }
     }
 );
