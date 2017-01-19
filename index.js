@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var passport = require('passport');
 var config = require('./config.js');
+var request = require('request');
 
 
 var IntercomStrategy = require('passport-intercom').Strategy;
@@ -50,13 +51,35 @@ app.get('/auth/intercom/callback',
     res.redirect('/');
   });
 
-app.get('/auth/redirect',
-  passport.authenticate('intercom', { failureRedirect: '/register' }),
-  function(req, res) {
-    console.log('res' + res);
-    // Successful authentication, redirect home.
-    res.redirect('/');
+app.get('/auth/redirect', function(request, response) {
+  console.log(request.params.code);
+ 
+   var myJSONObject = { 
+    code:request.params.code,
+    client_id:config.intercom.clientID,
+    client_secret:config.intercom.clientSecret
+   };
+
+  request({
+      url: "https://api.intercom.io/auth/eagle/token",
+      method: "POST",
+      json: true,   // <--Very important!!!
+      body: myJSONObject
+  }, function (error, response, body){
+      console.log(response);
+       console.log(body);
   });
+
+});
+
+
+
+  // passport.authenticate('intercom', { failureRedirect: '/register' }),
+  // function(req, res) {
+  //   console.log('res' + res);
+  //   // Successful authentication, redirect home.
+  //   res.redirect('/');
+  // });
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
