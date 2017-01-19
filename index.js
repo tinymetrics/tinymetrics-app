@@ -72,9 +72,9 @@ app.get('/auth/redirect', function(request, response) {
   }, function (error, res, data){
     console.log("DONEEEE");
      
-    var jsonData= JSON.parse(res);
-    console.log(jsonData);
-      var client = new Intercom.Client({ token: jsonData.token });
+    console.log(res);
+    console.log(data)
+      var client = new Intercom.Client({ token: res.token });
       console.log("clienyt"+client);
        client.users.list(function (d) {
           console.log("clienUsers");
