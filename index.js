@@ -97,13 +97,17 @@ app.get('/auth/redirect',  function(request, response) {
         if (!error && resp.statusCode == 200) {
             console.log(body);
            console.log(body.token);
-           
+
             var client = new Intercom.Client({ token: body.token });
-            console.log("clienyt"+client);
              client.users.list(function (d) {
                 console.log("clienUsers");
                 console.log(d);
               });
+             
+             client.admins.me(function(usr){
+               console.log("USR");
+               console.log(usr);
+             });
 
 
                 response.redirect('/');
