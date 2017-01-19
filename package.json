@@ -15,8 +15,7 @@
     "express": "4.13.3",
     "passport":"0.3.2",
     "passport-intercom":"0.0.3",
- 
-    "http-post":"0.1.1",
+    "request":"2.79.0",
     "intercom-client":"2.8.6"
   },
   "repository": {
