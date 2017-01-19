@@ -429,13 +429,13 @@
             </div>
             <div class="panel-body">
                 <div class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-default active" data-period="day">
+                    <label class="btn btn-default active" data-period="0">
                         <input type="checkbox"> Day
                     </label>
-                    <label class="btn btn-default" data-period="week">
+                    <label class="btn btn-default" data-period="1">
                         <input type="checkbox"> Week
                     </label>
-                    <label class="btn btn-default" data-period="month">
+                    <label class="btn btn-default" data-period="2">
                         <input type="checkbox"> Month
                     </label>
                 </div>
@@ -894,8 +894,10 @@
 <script src="javascripts/charts.js"></script>
 
 <script>
+var ChartPeriod = Object.freeze({Day: "0", Week: "1", Month: "2"})
 
     $(function () {
+        var registeredUsersChart=null;
         $('.btn-group input[type="checkbox"]').on('change', function() {
             var previousSelected=$('.active').not(this);
            previousSelected.removeClass("active");
@@ -903,63 +905,24 @@
            createRegisterUsersChart(period);
         });
 
-      
-        var createRegisterUsersChart= function(period){
 
-             var lineData;
-           
-            if (period==="day") {
-               lineData = {  labels: ["09.01", "10.01", "11.01", "12.01", "13.01", "14.01", "15.01"],
+        var createLineChart= function(containerId,labelsValues,dataValues){
+            $("#"+containerId).empty();
+            var lineData = {  
+                labels: labelsValues,
                 datasets: [
-                {
-                    label: "Example dataset",
-                    fillColor: "rgba(227,245,255,0.5)",
-                    strokeColor: "rgba(37,149,255,1)",
-                    pointColor: "rgba(37,149,255,1)",
-                    pointStrokeColor: "#32749a",
-                    pointHighlightFill: "#32749a",
-                    pointHighlightStroke: "rgba(37,149,255,1)",
-                    data: [12, 18, 23, 20, 29, 26, 4]
-                }
-                ]
-                };
-            }
-
-            if (period==="month") {
-                  lineData = {
-                    labels: ["January", "February", "March", "April", "May", "June", "July"],
-                    datasets: [
-                    {
-                        label: "Example dataset", 
-                        fillColor: "rgba(227,245,255,0.5)",
-                    strokeColor: "rgba(37,149,255,1)",
-                    pointColor: "rgba(37,149,255,1)",
-                    pointStrokeColor: "#32749a",
-                    pointHighlightFill: "#32749a",
-                    pointHighlightStroke: "rgba(37,149,255,1)",
-                        data: [22, 44, 67, 43, 76, 45, 12]
-                    }
-                    ]
-                };
-            }
-
-            if (period==="week") {
-                  lineData = {
-                    labels: ["02.01-08.01", "09.01-01.15", "16.01-21.01", "23.01-29.01", "30.01-05.02", "06.02-12.02", "13.02-19.02"],
-                    datasets: [
                     {
                         label: "Example dataset",
-                       fillColor: "rgba(227,245,255,0.5)",
-                    strokeColor: "rgba(37,149,255,1)",
-                    pointColor: "rgba(37,149,255,1)",
-                    pointStrokeColor: "#32749a",
-                    pointHighlightFill: "#32749a",
-                    pointHighlightStroke: "rgba(37,149,255,1)",
-                        data: [45, 23, 35, 12, 31, 26, 39]
+                        fillColor: "rgba(227,245,255,0.5)",
+                        strokeColor: "rgba(37,149,255,1)",
+                        pointColor: "rgba(37,149,255,1)",
+                        pointStrokeColor: "#32749a",
+                        pointHighlightFill: "#32749a",
+                        pointHighlightStroke: "rgba(37,149,255,1)",
+                        data: dataValues
                     }
-                    ]
-                };
-            }
+                ]
+            };
 
             var lineOptions = {
                 scaleShowGridLines : true,
@@ -977,11 +940,40 @@
                 responsive: true
             };
 
+            var ctx = document.getElementById(containerId).getContext("2d");
+             registeredUsersChart = new Chart(ctx).Line(lineData, lineOptions);
 
-            var ctx = document.getElementById("registeredUsers").getContext("2d");
-            var myNewChart = new Chart(ctx).Line(lineData, lineOptions);
         }
-          createRegisterUsersChart("day");
+      
+        var createRegisterUsersChart= function(period){
+if(registeredUsersChart!=null){
+    registeredUsersChart.destroy();
+}
+             var labelsValues=[];
+             var dataValues=[];
+            switch(period) {
+                case ChartPeriod.Week:{
+                    labelsValues=["02.01-08.01", "09.01-01.15", "16.01-21.01", "23.01-29.01", "30.01-05.02", "06.02-12.02", "13.02-19.02"];
+                    dataValues = [45, 23, 35, 12, 31, 26, 39];
+                    break;
+                }
+                case ChartPeriod.Month:{
+                   labelsValues=["January", "February", "March", "April", "May", "June", "July"];
+                    dataValues = [22, 44, 67, 43, 76, 45, 12];
+                    break;   
+                }
+                case ChartPeriod.Day:{
+                   labelsValues=["08.01", "09.01", "10.01", "11.01", "12.01", "13.01", "14.01"],
+                    dataValues = [12, 18, 23, 20, 29, 26, 4];
+                    break;   
+                }
+           }
+           createLineChart("registeredUsers",labelsValues,dataValues);
+
+        }
+
+
+          createRegisterUsersChart(ChartPeriod.Day);
         /**
          * Flot charts data and options
          */

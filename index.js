@@ -1,13 +1,16 @@
 var express = require('express');
 var app = express();
 var passport = require('passport');
+var config = require('./config.js');
+
 
 var IntercomStrategy = require('passport-intercom').Strategy;
 
 passport.use(new IntercomStrategy({
-    clientID: 'e3d7ab13-742a-4a05-baf1-f246a38bd182',
-    clientSecret: '2aae64b4-3af2-44e8-8366-32f865fdae77',
-    callbackURL: "https://tinymetricsdev.herokuapp.com/auth/redirect"
+  clientID: config.intercom.clientID,
+    clientSecret: config.intercom.clientSecret,
+    callbackURL: config.intercom.callbackURL
+    
   },
   function(accessToken, refreshToken, profile, done) {
     console.log("accessToken "+accessToken+" profile "+profile);
@@ -37,6 +40,7 @@ app.get('/registerAuth', function(request, response) {
 });
 
 app.get('/auth/intercom',  passport.authenticate('intercom'));
+app.get('/auth',  passport.authenticate('intercom'));
 
 app.get('/auth/intercom/callback',
   passport.authenticate('intercom', { failureRedirect: '/register' }),
