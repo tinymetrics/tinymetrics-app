@@ -87,7 +87,7 @@ app.get('/auth/redirect',  function(request, response) {
 
   // });
 
-  request.post(
+  requestHttp.post(
     'https://api.intercom.io/auth/eagle/token',
     { json: { code:request.query.code,
      client_id:config.intercom.clientID,
