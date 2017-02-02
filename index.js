@@ -77,8 +77,8 @@ app.post('/saveUser',function(request,response){
 app.get('/intercomUserData',function(request,response){
    var client = new Intercom.Client({ token: request.session.token});
    client.admins.me(function(usr){
-     //console.log(usr.body);
-      response.json({ data: usr}); 
+     var user={email: usr.responseJSON.data.body.email, name:data.responseJSON.data.body.name};
+      response.json({ data: user}); 
     });
 });
 
@@ -92,7 +92,7 @@ app.get('/auth',  passport.authenticate('intercom'));
 app.get('/auth/intercom/callback',
   passport.authenticate('intercom', { failureRedirect: '/register' }),
   function(req, res) {
-  	console.log('res' + res);
+  	//console.log('res' + res);
     // Successful authentication, redirect home.
     res.redirect('/');
   });
