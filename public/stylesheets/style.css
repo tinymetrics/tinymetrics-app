@@ -2117,7 +2117,7 @@ body.fullscreen-panel-mode {
   color: #3498db;
 }
 .text-success {
-  color: #62cb31;
+  color: #2595FF;
 }
 .text-warning {
   color: #ffb606;
@@ -3633,8 +3633,18 @@ ul.h-list li:hover a {
 }
 
 .btn-default:active !important{
-background-color: #f1f3f6;
+    background-color: #f1f3f6;
     border-color: #e4e5e7;
     color: #606265;
   }
-
+  .h4-panel-normal-weight{
+    font-weight: normal !important;
+  }
+.btn-custom{
+  background-color: #2595FF;
+  color: white;
+}
+.btn-custom:hover{
+ 
+  color: #F1F3F6;
+}

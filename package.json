@@ -16,7 +16,10 @@
     "passport":"0.3.2",
     "passport-intercom":"0.0.3",
     "request":"2.79.0",
-    "intercom-client":"2.8.6"
+    "intercom-client":"2.8.6",
+    "cookie-parser":"1.4.3",
+    "express-session":"1.14.2",
+    "body-parser":"1.16.0"
   },
   "repository": {
     "type": "git",

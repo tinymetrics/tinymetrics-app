@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,32 +38,23 @@
     <div class="row">
         <div class="col-md-12">
             <div class="text-center m-b-md">
-                <h3>Sign Up Instantly</h3>
-                <small>All plans come with a free 15 day trial!</small>
+                <h2>Sign Up</h2>
+                <h5>We will  create an account with  this data, retrieved from you intercom account!</h5>
             </div>
             <div class="hpanel">
                 <div class="panel-body">
-                        <form action="#" id="loginForm">
+                        <form id="loginForm" >
                             <div class="row">
                             <div class="form-group col-lg-12">
                                 <label>Email Address</label>
-                                <input type="" value="" id="" class="form-control" name="">
+                                <input type="email"  id="emailInput" class="form-control" required />
                             </div>
-                            <div class="form-group col-lg-6">
-                                <label>Password</label>
-                                <input type="password" value="" id="" class="form-control" name="">
-                            </div>
-                            <div class="form-group col-lg-6">
-                                <label>Repeat Password</label>
-                                <input type="password" value="" id="" class="form-control" name="">
-                            </div>
-                            <div class="checkbox col-lg-12">
-                                <input type="checkbox" class="i-checks" checked>
-                                Sign up for our newsletter to get early access to new features & discounts
-                            </div>
+                            <div class="form-group col-lg-12">
+                                <label>Full Name</label>
+                                <input  id="fullNameInput" class="form-control" required />
                             </div>
                             <div class="text-center">
-                                <button class="btn btn-success col-lg-12">Sign up now</button>
+                                <button  id="saveUserAccountBtn" type="submit" class="btn btn-custom col-lg-12">Sign up now for your free trial</button>
                             </div>
                         </form>
                 </div>
@@ -87,6 +79,39 @@
 
 <!-- App scripts -->
 <script src="javascripts/homer.js"></script>
+<script type="text/javascript">
+$.ajax({
+  url: '/intercomUserData',
+  complete: function(data) {
 
+    $("#emailInput").text(data.email);
+    $("#fullNameInput").text(data.user);
+  }
+});
+function isEmail(email) {
+  var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  return regex.test(email);
+}
+$("#saveUserAccountBtn").click(function(e){
+   var email= $("#emailInput").val();
+   var fullName=$("#fullNameInput").val();
+   var regx = /[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}/igm;
+   if(email === "")
+        return;
+   if( isEmail(email)===false  || fullName === ""){
+     return;
+   }
+    var dataToSend=JSON.stringify({ email:   $("#emailInput").val(), fullName: $("#fullNameInput").val() })
+    $.ajax({
+        method: "POST",
+        contentType: "application/json",
+        url: "/saveUser",
+        data: dataToSend,
+        complete:function(e){
+            window.location.href = "/";
+        }
+    });
+});
+</script>
 </body>
 </html>
