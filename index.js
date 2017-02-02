@@ -54,6 +54,7 @@ app.get('/', function(request, response) {
 });
 
 app.get('/register', function(request, response) {
+    request.session.token= request.query.token;
      response.render('pages/register');
 });
 
