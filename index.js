@@ -41,6 +41,9 @@ app.set('view engine', 'ejs');
 app.get('/', function(request, response) {
   if(request.query.token!=null){
     request.session.token= request.query.token;
+  }else
+  {
+    response.redirect("/registerAuth");
   }
   // set hardcoded token for test purpose
   // if(request.session.token!=null){
@@ -56,12 +59,15 @@ app.get('/register', function(request, response) {
 app.post('/saveUser',function(request,response){
 
       requestHttp.post('https://secret-waters-92571.herokuapp.com/user',
-      { json: { accessToken: request.session.token ,
-       fullName:request.body.fullName,
-       email:request.body.email
-              } },
+      {
+       json: { 
+              accessToken: request.session.token ,
+              fullName:request.body.fullName,
+              email:request.body.email
+              } 
+            },
       function (error, resp, body) {
-          console.log("sentData");
+          //console.log("sentData");
           //console.log(resp);
           response.json('ok');
         });
