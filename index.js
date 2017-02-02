@@ -40,7 +40,8 @@ app.set('view engine', 'ejs');
 
 app.get('/', function(request, response) {
   if(request.query.token!=null){
-    request.session.token= request.query.token;
+     request.session.token= request.query.token;
+     response.render('pages/index');
   }else
   {
     response.redirect("/registerAuth");
@@ -49,7 +50,7 @@ app.get('/', function(request, response) {
   // if(request.session.token!=null){
   //   request.session.token = 'dG9rOjZkMzhlNTJjX2QzMjFfNDZmNV9hMGY0XzllYTgzYjQ2OGY1ZjoxOjA=';  
   // }
-  response.render('pages/index');
+ 
 });
 
 app.get('/register', function(request, response) {
