@@ -76,10 +76,12 @@ app.post('/saveUser',function(request,response){
 });
 
 app.get('/intercomUserData',function(request,response){
+  console.log(usr);
    var client = new Intercom.Client({ token: request.session.token});
    client.admins.me(function(usr){
-     var user={email: usr.responseJSON.data.body.email, name:data.responseJSON.data.body.name};
-      response.json({ data: user}); 
+      console.log(usr);
+     // var user={email: usr.responseJSON().data.body.email, name:data.responseJSON().data.body.name};
+      response.json({ data: usr}); 
     });
 });
 

@@ -84,8 +84,8 @@ $.ajax({
   url: '/intercomUserData',
   complete: function(data) {
 
-    $("#emailInput").text(data.email);
-    $("#fullNameInput").text(data.user);
+    $("#emailInput").text(data.responseJSON.data.body.email;
+    $("#fullNameInput").text(data.responseJSON.data.body.email);
   }
 });
 function isEmail(email) {
