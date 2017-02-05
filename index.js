@@ -53,9 +53,9 @@ app.get('/', function(request, response) {
  
 });
 
-app.get('/register', function(request, response) {
+app.get('/preview', function(request, response) {
     request.session.token= request.query.token;
-     response.render('pages/register');
+     response.render('pages/preview');
 });
 
 app.post('/saveUser',function(request,response){
@@ -122,7 +122,7 @@ app.get('/auth/redirect',  function(request, response) {
                  console.log("USR");
                  console.log(usr);
                });
-                  response.redirect('/token=' + body.token);
+                  response.redirect('/preview?token=' + body.token);
           }
       }
   );
