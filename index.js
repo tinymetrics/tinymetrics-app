@@ -122,7 +122,7 @@ app.get('/auth/redirect',  function(request, response) {
                  console.log("USR");
                  console.log(usr);
                });
-                  response.redirect('/register?token=' + body.token);
+                  response.redirect('/token=' + body.token);
           }
       }
   );
