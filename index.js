@@ -39,13 +39,13 @@ app.set('view engine', 'ejs');
 
 
 app.get('/', function(request, response) {
-  if(request.query.token!=null){
-     request.session.token= request.query.token;
+  // if(request.query.token!=null){
+  //    request.session.token= request.query.token;
      response.render('pages/index');
-  }else
-  {
-    response.redirect("/registerAuth");
-  }
+  // }else
+  // {
+  //   response.redirect("/registerAuth");
+  // }
   // set hardcoded token for test purpose
   // if(request.session.token!=null){
   //   request.session.token = 'dG9rOjZkMzhlNTJjX2QzMjFfNDZmNV9hMGY0XzllYTgzYjQ2OGY1ZjoxOjA=';  
@@ -84,8 +84,8 @@ app.get('/intercomUserData',function(request,response){
     });
 });
 
-app.get('/registerAuth', function(request, response) {
-  response.render('pages/registerAuth');
+app.get('/register', function(request, response) {
+  response.render('pages/register');
 });
 
 app.get('/auth/intercom',  passport.authenticate('intercom'));
