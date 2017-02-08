@@ -88,6 +88,15 @@ app.get('/register', function(request, response) {
   response.render('pages/register');
 });
 
+app.get('/terms', function(request, response) {
+  response.render('pages/terms');
+});
+
+app.get('/privacy', function(request, response) {
+  response.render('pages/privacy');
+});
+
+
 app.get('/auth/intercom',  passport.authenticate('intercom'));
 app.get('/auth',  passport.authenticate('intercom'));
 
@@ -118,14 +127,18 @@ app.get('/auth/redirect',  function(request, response) {
             client.admins.me(function(err,usr){
               var body = '';
               usr.on('data', function(chunk) {
+                console.log("chunck");
                 body += chunk;
               });
                usr.on('end', function() {
+                console.log("end");
                   console.log(body);
               });
             //  console.log(usr.body);
              // var user=JSON.stringify(usr);
            //   console.log(user);
+           var c=JSON.parse(usr);
+           console.log(c);
               response.json({ data: usr}); 
              //var user=usr.data.body;
            // console.log("usr"+user);
