@@ -108,13 +108,8 @@ app.get('/auth/redirect',  function(request, response) {
        } },
       function (error, resp, body) {
           if (!error && resp.statusCode == 200) {
-     
             request.session.token = body.token;
-
-            client.admins.me(function(usr){
-               console.log("USR");
-               console.log(usr);
-            });
+        
             requestHttp.post('https://secret-waters-92571.herokuapp.com/user',
             {
               json:
