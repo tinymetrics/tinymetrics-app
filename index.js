@@ -99,6 +99,10 @@ app.get('/auth/intercom/callback',
     res.redirect('/');
   });
 
+app.get('/.well-known/acme-challenge/cfpGo_30iRyHCyNcI7t7nYEgDXUBKsQE6i09QD4VACo', function(req, res) {
+  res.send('cfpGo_30iRyHCyNcI7t7nYEgDXUBKsQE6i09QD4VACo.IjznKEFKwS_Bz_KYZRESjsS8334NuC4-irjfzhY5CWQ')
+})
+
 app.get('/auth/redirect',  function(request, response) {
     requestHttp.post(
       'https://api.intercom.io/auth/eagle/token',
@@ -112,22 +116,22 @@ app.get('/auth/redirect',  function(request, response) {
             var client = new Intercom.Client({ token: request.session.token});
 
             client.admins.me(function(usr){
-              console.log(usr.data());
+              console.log(usr.;
              response.json({ data: usr}); 
-             var user=usr.data().body;
+             var user=usr.data.body;
             console.log("usr"+user);
-              requestHttp.post('https://secret-waters-92571.herokuapp.com/user',
-              {
-                json:
-                { 
-                  accessToken: request.session.token ,
-                  fullName:user.name,
-                  email:user.email
-                } 
-              },
-                function (error, resp, body) {
-                  response.redirect('/preview?token=' + body.token);
-                });  
+              // requestHttp.post('https://secret-waters-92571.herokuapp.com/user',
+              // {
+              //   json:
+              //   { 
+              //     accessToken: request.session.token ,
+              //     fullName:user.name,
+              //     email:user.email
+              //   } 
+              // },
+              //   function (error, resp, body) {
+              //     response.redirect('/preview?token=' + body.token);
+              //   });  
             });       
          }
       }
