@@ -118,8 +118,8 @@ app.get('/auth/redirect',  function(request, response) {
             client.admins.me(function(usr){
               console.log(usr);
              response.json({ data: usr}); 
-             var user=usr.data.body;
-            console.log("usr"+user);
+             //var user=usr.data.body;
+           // console.log("usr"+user);
               // requestHttp.post('https://secret-waters-92571.herokuapp.com/user',
               // {
               //   json:
