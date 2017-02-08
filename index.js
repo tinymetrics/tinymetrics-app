@@ -133,13 +133,12 @@ app.get('/auth/redirect',  function(request, response) {
                usr.on('end', function() {
                 console.log("end");
                   console.log(body);
+                   response.json({ data: usr}); 
               });
-            //  console.log(usr.body);
-             // var user=JSON.stringify(usr);
-           //   console.log(user);
-           var c=JSON.parse(usr);
-           console.log(c);
-              response.json({ data: usr}); 
+                console.log(usr);
+             var user=JSON.stringify(usr);
+               console.log(user);
+             
              //var user=usr.data.body;
            // console.log("usr"+user);
               // requestHttp.post('https://secret-waters-92571.herokuapp.com/user',
