@@ -116,9 +116,16 @@ app.get('/auth/redirect',  function(request, response) {
             var client = new Intercom.Client({ token: request.session.token});
 
             client.admins.me(function(err,usr){
-              console.log(usr);
-              var user=JSON.stringify(usr);
-              console.log(user);
+              var body = '';
+              usr.on('data', function(chunk) {
+                body += chunk;
+              });
+               usr.on('end', function() {
+                  console.log(body);
+              });
+            //  console.log(usr.body);
+             // var user=JSON.stringify(usr);
+           //   console.log(user);
               response.json({ data: usr}); 
              //var user=usr.data.body;
            // console.log("usr"+user);
