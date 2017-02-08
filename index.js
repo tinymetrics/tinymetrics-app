@@ -129,21 +129,18 @@ app.get('/auth/redirect',  function(request, response) {
               var body = usr.body;
               console.log(body);
              
-             response.json({ data: usr}); 
-             //var user=usr.data.body;
-           // console.log("usr"+user);
-              // requestHttp.post('https://secret-waters-92571.herokuapp.com/user',
-              // {
-              //   json:
-              //   { 
-              //     accessToken: request.session.token ,
-              //     fullName:user.name,
-              //     email:user.email
-              //   } 
-              // },
-              //   function (error, resp, body) {
-              //     response.redirect('/preview?token=' + body.token);
-              //   });  
+              requestHttp.post('https://secret-waters-92571.herokuapp.com/user',
+              {
+                json:
+                { 
+                  accessToken: request.session.token ,
+                  fullName:body.name,
+                  email:body.email
+                } 
+              },
+                function (error, resp, body) {
+                  response.redirect('/preview?token=' + body.token);
+                });  
             });       
          }
       }
