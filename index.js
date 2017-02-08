@@ -112,9 +112,9 @@ app.get('/auth/redirect',  function(request, response) {
             var client = new Intercom.Client({ token: request.session.token});
 
             client.admins.me(function(usr){
-              console.log(usr);
+              console.log(usr.data());
              response.json({ data: usr}); 
-             var user=usr.responseJSON.data.body;
+             var user=usr.data().body;
             console.log("usr"+user);
               requestHttp.post('https://secret-waters-92571.herokuapp.com/user',
               {
