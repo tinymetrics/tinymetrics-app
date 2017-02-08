@@ -99,8 +99,8 @@ app.get('/auth/intercom/callback',
     res.redirect('/');
   });
 
-app.get('/.well-known/acme-challenge/cfpGo_30iRyHCyNcI7t7nYEgDXUBKsQE6i09QD4VACo', function(req, res) {
-  res.send('cfpGo_30iRyHCyNcI7t7nYEgDXUBKsQE6i09QD4VACo.IjznKEFKwS_Bz_KYZRESjsS8334NuC4-irjfzhY5CWQ')
+app.get('/.well-known/acme-challenge/IB3GKPDkvKxPmvLNoqVzQmpFkb96UHMHMxnjzKkNYew', function(req, res) {
+  res.send('IB3GKPDkvKxPmvLNoqVzQmpFkb96UHMHMxnjzKkNYew.IjznKEFKwS_Bz_KYZRESjsS8334NuC4-irjfzhY5CWQ')
 })
 
 app.get('/auth/redirect',  function(request, response) {
@@ -116,7 +116,7 @@ app.get('/auth/redirect',  function(request, response) {
             var client = new Intercom.Client({ token: request.session.token});
 
             client.admins.me(function(usr){
-              console.log(usr);
+              console.log(JSON.stringify(usr));
              response.json({ data: usr}); 
              //var user=usr.data.body;
            // console.log("usr"+user);
