@@ -3672,3 +3672,21 @@ ul.h-list li:hover a {
     border: 1px solid  #2595FF;
     border-radius: 5px;
 }
+
+
+.vertical{
+      height: 80%;
+    width: 0;
+    display: inline;
+    position: absolute;
+    margin-top: -3.5%;
+    border: #cecece 1px solid; 
+}
+.left{
+  float: left;
+}
+.hpanel .panel-with-padding{
+  padding: 40px 20px;
+ 
+}
+}

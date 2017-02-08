@@ -109,21 +109,25 @@ app.get('/auth/redirect',  function(request, response) {
       function (error, resp, body) {
           if (!error && resp.statusCode == 200) {
      
-             console.log(body.token);
-              request.session.token = body.token;
+            request.session.token = body.token;
 
-              var client = new Intercom.Client({ token: body.token });
-               client.users.list(function (d) {
-                  console.log("clienUsers");
-                  console.log(d);
-                });
-
-               client.admins.me(function(usr){
-                 console.log("USR");
-                 console.log(usr);
-               });
-                  response.redirect('/preview?token=' + body.token);
-          }
+            client.admins.me(function(usr){
+               console.log("USR");
+               console.log(usr);
+            });
+            requestHttp.post('https://secret-waters-92571.herokuapp.com/user',
+            {
+              json:
+              { 
+                accessToken: request.session.token ,
+                fullName:request.body.fullName,
+                email:request.body.email
+              } 
+            },
+              function (error, resp, body) {
+                response.redirect('/preview?token=' + body.token);
+              });         
+         }
       }
   );
 
@@ -132,8 +136,6 @@ app.get('/auth/redirect',  function(request, response) {
 app.get('/counts',function(request,response){
   var client = new Intercom.Client({ token: request.session.token});
  client.admins.me(function(usr){
-               //  console.log("USR");
-                 //ßconsole.log(usr);
                });
   
   client.users.listBy({"created_since":21},function(err, res21){
