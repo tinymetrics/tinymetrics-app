@@ -122,20 +122,21 @@ app.get('/auth/redirect',  function(request, response) {
       function (error, resp, body) {
           if (!error && resp.statusCode == 200) {
             request.session.token = body.token;
+
             var client = new Intercom.Client({ token: request.session.token});
 
-            client.admins.me(function(err,usr){
+            client.admins.me(function(err,admin){
 
-              var body = usr.body;
-              console.log(body);
+              var adminData = admin.body;
+              console.log(adminData);
              
               requestHttp.post('https://secret-waters-92571.herokuapp.com/user',
               {
                 json:
                 { 
                   accessToken: request.session.token ,
-                  fullName:body.name,
-                  email:body.email
+                  fullName: adminData.name,
+                  email: adminData.email
                 } 
               },
                 function (error, resp, body) {
