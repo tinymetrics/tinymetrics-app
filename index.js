@@ -54,7 +54,7 @@ app.get('/', function(request, response) {
 });
 
 app.get('/preview', function(request, response) {
-    request.session.token= request.query.token;
+   // request.session.token= request.query.token;
      response.render('pages/preview');
 });
 
@@ -94,6 +94,10 @@ app.get('/terms', function(request, response) {
 
 app.get('/privacy', function(request, response) {
   response.render('pages/privacy');
+});
+
+app.get('/terms', function(request, response) {
+  response.render('pages/terms');
 });
 
 
@@ -175,13 +179,6 @@ app.get('/counts',function(request,response){
     });
   });
  
- // requestHttp({url:"https://api.intercom.io/subscriptions/", token:request.session.token },function (error, resp, body) {
- //   // Do more stuff with 'body' here
- //   console.log(body);
-
- //    });
-
-
 });
 
 app.listen(app.get('port'), function() {
