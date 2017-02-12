@@ -131,10 +131,11 @@ app.get('/auth/redirect',  function(request, response) {
       function (error, resp, body) {
           if (!error && resp.statusCode == 200) {
             request.session.token = body.token;
+            
 
             var client = new Intercom.Client({ token: request.session.token});
 
-            client.admins.me(function(err,admin){
+             client.admins.me(function(err,admin){
 
               var adminData = admin.body;
               console.log(adminData);
@@ -148,7 +149,7 @@ app.get('/auth/redirect',  function(request, response) {
                   email: adminData.email
                 } 
               },
-                function (error, resp, body) {
+                function (error, resp, bodySaved) {
                   response.redirect('/preview?token=' + body.token);
                 });  
             });       
