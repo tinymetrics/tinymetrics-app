@@ -54,9 +54,14 @@ app.get('/', function(request, response) {
 });
 
 app.get('/preview', function(request, response) {
-   // request.session.token= request.query.token;
+    request.session.token= request.query.token;
      response.render('pages/preview');
 });
+
+// app.get('/dashboard', function(request, response) {
+//    // request.session.token= request.query.token;
+//      response.render('pages/dashboard');
+// });
 
 app.post('/saveUser',function(request,response){
 
@@ -64,7 +69,7 @@ app.post('/saveUser',function(request,response){
       {
        json: { 
               accessToken: request.session.token ,
-              fullName:request.body.fullName,
+              fullName:request.body.name,
               email:request.body.email
               } 
             },
@@ -80,7 +85,7 @@ app.get('/intercomUserData',function(request,response){
    client.admins.me(function(usr){
 
      // var user={email: usr.responseJSON().data.body.email, name:data.responseJSON().data.body.name};
-      response.json({ data: usr}); 
+      response.json({ data: usr.body.name}); 
     });
 });
 

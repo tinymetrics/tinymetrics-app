@@ -3650,6 +3650,7 @@ ul.h-list li:hover a {
 }
 .preview{
   background-image: url("/images/preview.png");
+  background-size: cover;
   background-repeat: no-repeat;
   position: absolute;
   z-index: -1; 

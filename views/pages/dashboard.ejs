@@ -919,31 +919,33 @@
 <script src="javascripts/charts.js"></script>
 
 <script>
-$.ajax({
-  url: '/counts',
-  complete: function(data) {
+//$.ajax({
+  //url: '/counts',
+  //complete: function(data) {
 
-    var responseObject=data.responseJSON.data;
-      $(".visitators-no").text("34 522");
+  //  var responseObject=data.responseJSON.data;
+      $(".visitators-no").text("322");
     // $(".leads-no").text(responseObject.counts.lead.count);
     // $(".total-users-no").text(responseObject.counts.user.count);
     // $(".new-users-no").text(responseObject.usersCreated);
 
-     $(".leads-no").text("4 386");
-    $(".total-users-no").text("42 873");
-    $(".new-users-no").text("376");
+     $(".leads-no").text("186");
+    $(".total-users-no").text("2 873");
+    $(".new-users-no").text("76");
  //   var percentText= responseObject.percentUsers;
   var percentText= "5.3";
-    if(responseObject.percentUsers>0){
-        percentText+="% increase "
-    }else{
-        percentText+="% decrease"
-    }
-    $(".percent-no").text();
-    $(".total-conversation-no").text("123k")
+    // if(responseObject.percentUsers>0){
+    //     percentText+="% increase "
+    // }else{
+    //     percentText+="% decrease"
+    // }
 
-  }
-});
+     percentText+="% increase "
+    $(".percent-no").text(percentText);
+    $(".total-conversation-no").text("3k")
+
+//  }
+//});
 
 var ChartPeriod = Object.freeze({Day: "0", Week: "1", Month: "2"})
 
