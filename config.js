@@ -1,7 +1,7 @@
 module.exports = {
   intercom: {
-    clientID: 'e3d7ab13-742a-4a05-baf1-f246a38bd182',
-    clientSecret: '2aae64b4-3af2-44e8-8366-32f865fdae77',
+    clientID: '0ebb3192-f6a8-4264-8371-154bad57b718',
+    clientSecret: 'b9d5fac2-ef59-4c5d-aead-12aebff4d8f2',
     callbackURL: "https://tinymetrics.in/auth/redirect"
   }
 };
