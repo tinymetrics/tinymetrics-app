@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <!-- Page title -->
-    <title>Signup | TinyMetrics</title>
+    <title>TinyMetrics -  Analytics, Metrics and Insights on Intercom </title>
 
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!--<link rel="shortcut icon" type="image/ico" href="favicon.ico" />-->
@@ -28,7 +28,7 @@
 <body class="preview">
 
 <!-- Simple splash screen-->
-<div class="splash"> <div class="color-line"></div><div class="splash-title"><h1>Sign Up</h1><p>You're one step away to know more about your Instagram account</p><img src="images/loading-bars.svg" width="64" height="64" /> </div> </div>
+<div class="splash"> <div class="color-line"></div><div class="splash-title"><h1>Sign Up</h1><p>You're one step away to know more about your Intercom account</p><img src="images/loading-bars.svg" width="64" height="64" /> </div> </div>
 <!--[if lt IE 7]>
 <p class="alert alert-danger">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
@@ -40,9 +40,7 @@
            
             <div class="hpanel preview-hpanel">
                 <div class="panel-body">
-                <div class="text-center m-b-md">Hi <strong id="fullName"> </strong>, </div>
-                 
-                 We are gathering data to show your intercom stats.
+                <div class="text-center m-b-md"> Hold on, we are gathering data to show your Intercom stats.</div>
                 </div>
             </div>
         </div>
@@ -61,36 +59,6 @@
 
 <!-- App scripts -->
 <script src="javascripts/homer.js"></script>
-<script type="text/javascript">
-// $.ajax({
-//   url: '/intercomUserData',
-//   complete: function(data) {
 
-//    // $("#emailInput").text(data.responseJSON.data.body.email);
-//     $("#fullName").text(data);
-//   }
-// });
-
-// $("#saveUserAccountBtn").click(function(e){
-//    var email= $("#emailInput").val();
-//    var fullName=$("#fullNameInput").val();
-//    var regx = /[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}/igm;
-//    if(email === "")
-//         return;
-//    if( isEmail(email)===false  || fullName === ""){
-//      return;
-//    }
-//     var dataToSend=JSON.stringify({ email:   $("#emailInput").val(), fullName: $("#fullNameInput").val() })
-//     $.ajax({
-//         method: "POST",
-//         contentType: "application/json",
-//         url: "/saveUser",
-//         data: dataToSend,
-//         complete:function(e){
-//             window.location.href = "/";
-//         }
-//     });
-// });
-</script>
 </body>
 </html>
